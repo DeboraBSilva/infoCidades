@@ -1,0 +1,32 @@
+<%- include('header.ejs') %>
+
+<main>
+    <table class="pure-table">
+        <thead>
+            <tr>
+                <th>Código IBGE</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cidades.forEach(cidade => { %>
+            <tr>
+                <td><%= cidade.id %> </td>
+                <td><%= cidade.nome %> </td>
+                <td><%= cidade.microrregiao.mesorregiao.UF.nome %> </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</main>
+
+<script>
+    document.querySelector('#btnBusca').addEventListener('click', function (event) {
+        location.href = `/lista?uf=${document.querySelector('#txtBusca').value}`
+    })
+
+    document.querySelector('#txtBusca').setAttribute('placeholder',"UF...")
+</script>
+
+<%- include('footer.ejs') %>

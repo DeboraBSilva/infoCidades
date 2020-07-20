@@ -1,0 +1,41 @@
+<%- include('header.ejs') %>
+
+<main>
+    <h1>Dados Coletados do IBGE</h1>
+    <div>
+        <% if(cidade != '') { %>
+        <form class="pure-form pure-form-aligned">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="codigo">Codigo IBGE: </label>
+                    <input type="text" id="codigo" class="pure-u-1-2" value="<%= cidade.id %>"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="cidade">Cidade: </label>
+                    <input type="text" id="cidade" class="pure-u-1-2" value="<%= cidade.nome %>"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="uf">UF: </label>
+                    <input type="text" id="uf" class="pure-u-1-2" value="<%= cidade.microrregiao.mesorregiao.UF.sigla %>"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="estado">Estado: </label>
+                    <input type="text" id="estado" class="pure-u-1-2" value="<%= cidade.microrregiao.mesorregiao.UF.nome %>"/>
+                </div>
+                <div class="pure-control-group">
+                    <label for="regiao">Região: </label>
+                    <input type="text" id="regiao" class="pure-u-1-2" value="<%= cidade.microrregiao.mesorregiao.UF.regiao.nome %>"/>
+                </div>
+            </fieldset>
+        </form>
+        <% } %>
+    </div>
+</main>
+
+<script>
+    document.querySelector('#btnBusca').addEventListener('click', function (event) {
+        location.href = `/?cidade=${document.querySelector('#txtBusca').value}`
+    })
+</script>
+
+<%- include('footer.ejs') %>
